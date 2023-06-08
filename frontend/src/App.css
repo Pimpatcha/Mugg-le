@@ -1,0 +1,13 @@
+@import url('https://fonts.googleapis.com/css2?family=Aref+Ruqaa&display=swap');
+
+body{
+  /* background: url("./img/hogwards\ castle\ Live\ wallpaper-\(1080p\).mp4") center fixed; */
+  background-image: url("https://wallpaper.dog/large/41123.jpg");
+  display: flex;
+  background-size: cover;
+  /* backdrop-filter: blur(3px); */
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  font-family: 'Aref Ruqaa', sans-serif;
+}
