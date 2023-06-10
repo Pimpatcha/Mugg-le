@@ -9,8 +9,6 @@ import MyCollection from './Component/MyCollection'
 import Problem from './Component/Problem';
 import { DataContext } from './ContextApi';
 import { useState } from 'react';
-import './App.css';
-import './Component/style.css';
 import Admin from './Component/Admin';
 import AllItems from './Component/AllItems';
 import AllItemsAdmin from './Component/AllItemsAdmin';
