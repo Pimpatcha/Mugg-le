@@ -1,11 +1,12 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useRef, useState  } from 'react';
 import { Link } from 'react-router-dom';
 import { DataContext } from '../ContextApi';
 import logoweb from '../img/Icon.png'
+import './CSS/Home.css'
 
 const Home = () => {
-const { userData } = useContext(DataContext);
-  console.log(userData.firstName);
+  const { userData } = useContext(DataContext);
+    console.log(userData.firstName);
 
   return (
     <div>

@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import logoweb from '../img/Icon.png'
 import axios from 'axios';
+import './CSS/AllItems.css'
 
 function AllItems() {
   const [products, setProducts] = useState([]);

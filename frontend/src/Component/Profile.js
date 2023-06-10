@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { DataContext } from '../ContextApi';
 import logoweb from '../img/Icon.png'
+import './CSS/Profile.css'
 
 const Profile = () => {
   const { userData, setUserData } = useContext(DataContext);

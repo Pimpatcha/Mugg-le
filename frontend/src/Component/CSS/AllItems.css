@@ -1,0 +1,40 @@
+@import url('https://fonts.googleapis.com/css2?family=Aref+Ruqaa&display=swap');
+
+body{
+  /* background: url("./img/hogwards\ castle\ Live\ wallpaper-\(1080p\).mp4") center fixed; */
+  background-image: url("https://wallpaper.dog/large/41123.jpg");
+  display: flex;
+  background-size: cover;
+  /* backdrop-filter: blur(3px); */
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  font-family: 'Aref Ruqaa', sans-serif;
+}
+
+.item {
+  color: #000;
+  display: grid;
+  grid-template-columns:  auto auto auto auto;
+  grid-gap: 20px;
+  justify-items: center;
+}
+
+.item > div {
+  background-color: #a4dcff;
+  padding: 30px 50px;
+  text-align: center;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  width: 210px;
+}
+
+.item > img {
+  height: 100px;
+}
+
+.item p {
+  margin-top: 10px;
+}
+
+

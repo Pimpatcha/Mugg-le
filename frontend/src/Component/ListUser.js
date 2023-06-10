@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from 'react-router-dom';
 import axios from "axios";
 import logoweb from '../img/Icon.png'
+import './CSS/ListUser.css'
 
 const ListUser = () => {
   const [users, setUsers] = useState([]);
@@ -41,11 +42,11 @@ const ListUser = () => {
 
         <nav className="nav">
           <ul>
-            <li><a>Home</a></li>
+            <li><Link to="/admin">Home</Link></li>
             <li><Link to="/profile">My Profile</Link></li>
-            <li><Link to="/allitems">All Items</Link></li>
-            <li><Link to="/mycollection">My Collection</Link></li>
-            <li><Link to="/problem">Problem</Link></li>
+            <li><Link to="/allitemsadmin">All Items</Link></li>
+            <li><a>List Of User</a></li>
+            <li><Link to="/problemadmin">Problem</Link></li>
           </ul>
         </nav>
       </div>
