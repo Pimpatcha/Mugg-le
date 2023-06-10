@@ -3,12 +3,11 @@ import { Link } from 'react-router-dom';
 import { DataContext } from '../ContextApi';
 import logoweb from '../img/Icon.png';
 import './CSS/Home.css';
-import firebase from './firebase';
 
 const Home = () => {
   const { userData } = useContext(DataContext);
+  const [selectedImage, setSelectedImage] = useState(null);
   const [isEditing, setIsEditing] = useState(false);
-  const [slideImages, setSlideImages] = useState([]);
 
   const handleImageUpload = (event) => {
     const file = event.target.files[0];
@@ -22,27 +21,17 @@ const Home = () => {
   };
 
   const handleImageSave = () => {
-    if (selectedImage) {
-      firebase.database().ref('images').push(selectedImage); // บันทึกภาพลงใน Firebase Realtime Database
-    }
+    // Perform save image logic here
     setIsEditing(false);
   };
 
   useEffect(() => {
-    // อ่านข้อมูลภาพจาก Firebase Realtime Database เมื่อโหลดครั้งแรก
-    const initialLoad = firebase.database().ref('images');
-    initialLoad.on('value', (snapshot) => {
-      const images = snapshot.val();
-      if (images) {
-        const imageArray = Object.values(images);
-        setSlideImages(imageArray);
-        setSelectedImage(imageArray[0]);
-      }
-    });
+    const interval = setInterval(() => {
+      // Logic to rotate images automatically every 5 seconds
+    }, 5000);
 
-    // ปิดการติดตามการเปลี่ยนแปลงเมื่อ Component unmounts
     return () => {
-      initialLoad.off();
+      clearInterval(interval);
     };
   }, []);
 
@@ -60,16 +49,18 @@ const Home = () => {
           <ul>
             <li><a>Home</a></li>
             <li><Link to="/profile">My Profile</Link></li>
-            <li><Link to="/allitemsadmin">All Items</Link></li>
-            <li><Link to="/listuser">List of User</Link></li>
-            <li><Link to="/problemadmin">Problem</Link></li>
+            <li><Link to="/allitems">All Items</Link></li>
+            <li><Link to="/mycollection">My Collection</Link></li>
+            <li><Link to="/problem">Problem</Link></li>
           </ul>
         </nav>
 
         <div className="slideshow">
-          {slideImages.map((image, index) => (
-            <img key={index} src={image} alt={`Slide ${index + 1}`} />
-          ))}
+          <img src={selectedImage || 'image-url-1.jpg'} alt="Slide 1" />
+          <img src={selectedImage || 'image-url-2.jpg'} alt="Slide 2" />
+          <img src={selectedImage || 'image-url-3.jpg'} alt="Slide 3" />
+          <img src={selectedImage || 'image-url-4.jpg'} alt="Slide 4" />
+          <img src={selectedImage || 'image-url-5.jpg'} alt="Slide 5" />
         </div>
 
         <div className="edit-button">
@@ -89,4 +80,3 @@ const Home = () => {
 };
 
 export default Home;
-
