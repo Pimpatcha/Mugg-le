@@ -4,7 +4,7 @@ import { DataContext } from '../ContextApi';
 import logoweb from '../img/Icon.png';
 import './CSS/Home.css';
 
-const Home = () => {
+const Admin = () => {
   const { userData } = useContext(DataContext);
   const [selectedImage, setSelectedImage] = useState(null);
   const [isEditing, setIsEditing] = useState(false);
@@ -27,8 +27,19 @@ const Home = () => {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      // Logic to rotate images automatically every 5 seconds
-    }, 5000);
+      setSelectedImage((prevImage) => {
+        const images = [
+          'image-url-1.jpg',
+          'image-url-2.jpg',
+          'image-url-3.jpg',
+          'image-url-4.jpg',
+          'image-url-5.jpg',
+        ];
+        const currentIndex = images.indexOf(prevImage);
+        const nextIndex = (currentIndex + 1) % images.length;
+        return images[nextIndex];
+      });
+    }, 3000);
 
     return () => {
       clearInterval(interval);
@@ -49,9 +60,9 @@ const Home = () => {
           <ul>
             <li><a>Home</a></li>
             <li><Link to="/profile">My Profile</Link></li>
-            <li><Link to="/allitems">All Items</Link></li>
-            <li><Link to="/mycollection">My Collection</Link></li>
-            <li><Link to="/problem">Problem</Link></li>
+            <li><Link to="/allitemsadmin">All Items</Link></li>
+            <li><Link to="/listuser">List of User</Link></li>
+            <li><Link to="/problemadmin">Problem</Link></li>
           </ul>
         </nav>
 
@@ -66,17 +77,29 @@ const Home = () => {
         <div className="edit-button">
           <input type="file" accept="image/*" onChange={handleImageUpload} disabled={!isEditing} />
           {isEditing && (
-            <button onClick={handleImageSave}>Save</button>
+            <div className="popup active">
+              <div className="popup-content">
+                <h3>Edit Images</h3>
+                <div className="image-grid">
+                  <img src="image-url-1.jpg" alt="Image 1" onClick={() => setSelectedImage('image-url-1.jpg')} />
+                  <img src="image-url-2.jpg" alt="Image 2" onClick={() => setSelectedImage('image-url-2.jpg')} />
+                  <img src="image-url-3.jpg" alt="Image 3" onClick={() => setSelectedImage('image-url-3.jpg')} />
+                  <img src="image-url-4.jpg" alt="Image 4" onClick={() => setSelectedImage('image-url-4.jpg')} />
+                  <img src="image-url-5.jpg" alt="Image 5" onClick={() => setSelectedImage('image-url-5.jpg')} />
+                </div>
+                <button onClick={handleImageSave}>Save</button>
+              </div>
+            </div>
           )}
           <button onClick={() => setIsEditing(!isEditing)}>Edit</button>
         </div>
 
-        <div className="section-center">
+        {/* <div className="section-center">
           <txt>Welcome to <span>Wizth World</span>, <br /> {userData?.firstName} {userData?.lastName}</txt>
-        </div>
+        </div> */}
       </div>
     </div>
   );
 };
 
-export default Home;
+export default Admin;
