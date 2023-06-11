@@ -8,6 +8,13 @@ const Admin = () => {
   const { userData } = useContext(DataContext);
   const [selectedImage, setSelectedImage] = useState(null);
   const [isEditing, setIsEditing] = useState(false);
+  const [imageData, setImageData] = useState([
+    'image-url-1.jpg',
+    'image-url-2.jpg',
+    'image-url-3.jpg',
+    'image-url-4.jpg',
+    'image-url-5.jpg'
+  ]);
 
   const handleImageUpload = (event) => {
     const file = event.target.files[0];
@@ -25,26 +32,32 @@ const Admin = () => {
     setIsEditing(false);
   };
 
+  const handleImageChange = (index, event) => {
+    const file = event.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = () => {
+        const updatedImageData = [...imageData];
+        updatedImageData[index] = reader.result;
+        setImageData(updatedImageData);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
   useEffect(() => {
     const interval = setInterval(() => {
       setSelectedImage((prevImage) => {
-        const images = [
-          'image-url-1.jpg',
-          'image-url-2.jpg',
-          'image-url-3.jpg',
-          'image-url-4.jpg',
-          'image-url-5.jpg',
-        ];
-        const currentIndex = images.indexOf(prevImage);
-        const nextIndex = (currentIndex + 1) % images.length;
-        return images[nextIndex];
+        const currentIndex = imageData.indexOf(prevImage);
+        const nextIndex = (currentIndex + 1) % imageData.length;
+        return imageData[nextIndex];
       });
-    }, 3000);
+    }, 4000);
 
     return () => {
       clearInterval(interval);
     };
-  }, []);
+  }, [imageData]);
 
   return (
     <div>
@@ -65,34 +78,6 @@ const Admin = () => {
             <li><Link to="/problemadmin">Problem</Link></li>
           </ul>
         </nav>
-
-        <div className="slideshow">
-          <img src={selectedImage || 'image-url-1.jpg'} alt="Slide 1" />
-          <img src={selectedImage || 'image-url-2.jpg'} alt="Slide 2" />
-          <img src={selectedImage || 'image-url-3.jpg'} alt="Slide 3" />
-          <img src={selectedImage || 'image-url-4.jpg'} alt="Slide 4" />
-          <img src={selectedImage || 'image-url-5.jpg'} alt="Slide 5" />
-        </div>
-
-        <div className="edit-button">
-          <input type="file" accept="image/*" onChange={handleImageUpload} disabled={!isEditing} />
-          {isEditing && (
-            <div className="popup active">
-              <div className="popup-content">
-                <h3>Edit Images</h3>
-                <div className="image-grid">
-                  <img src="image-url-1.jpg" alt="Image 1" onClick={() => setSelectedImage('image-url-1.jpg')} />
-                  <img src="image-url-2.jpg" alt="Image 2" onClick={() => setSelectedImage('image-url-2.jpg')} />
-                  <img src="image-url-3.jpg" alt="Image 3" onClick={() => setSelectedImage('image-url-3.jpg')} />
-                  <img src="image-url-4.jpg" alt="Image 4" onClick={() => setSelectedImage('image-url-4.jpg')} />
-                  <img src="image-url-5.jpg" alt="Image 5" onClick={() => setSelectedImage('image-url-5.jpg')} />
-                </div>
-                <button onClick={handleImageSave}>Save</button>
-              </div>
-            </div>
-          )}
-          <button onClick={() => setIsEditing(!isEditing)}>Edit</button>
-        </div>
 
         {/* <div className="section-center">
           <txt>Welcome to <span>Wizth World</span>, <br /> {userData?.firstName} {userData?.lastName}</txt>
