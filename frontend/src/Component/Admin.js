@@ -1,8 +1,9 @@
-import React, { useContext, useEffect, useRef, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { DataContext } from '../ContextApi';
 import logoweb from '../img/Icon.png';
 import './CSS/Home.css';
+import $ from 'jquery';
 
 const Admin = () => {
   const { userData } = useContext(DataContext);
@@ -46,18 +47,32 @@ const Admin = () => {
   };
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      setSelectedImage((prevImage) => {
-        const currentIndex = imageData.indexOf(prevImage);
-        const nextIndex = (currentIndex + 1) % imageData.length;
-        return imageData[nextIndex];
+    const slideNext = () => {
+      $('.inner-wrapper').animate({ left: '-200%' }, 200, function () {
+        $(this).css('left', '-100%');
+        $('.slide').last().after($('.slide').first());
       });
-    }, 4000);
+    };
+
+    // Enabling auto scroll
+    let sliderInterval = setInterval(slideNext, 3000);
+
+    $('.prev').on('click', function () {
+      $('.inner-wrapper').animate({ left: '0%' }, 200, function () {
+        $(this).css('left', '-100%');
+        $('.slide').first().before($('.slide').last());
+      });
+    });
+
+    $('.next').on('click', function () {
+      clearInterval(sliderInterval);
+      slideNext();
+    });
 
     return () => {
-      clearInterval(interval);
+      clearInterval(sliderInterval);
     };
-  }, [imageData]);
+  }, []);
 
   return (
     <div>
@@ -78,6 +93,20 @@ const Admin = () => {
             <li><Link to="/problemadmin">Problem</Link></li>
           </ul>
         </nav>
+
+        <div className="container">
+          <div className="slider-wrapper">
+            <div className="inner-wrapper">
+              <div className="slide"><img src="img/" alt="harry" /></div>
+              <div className="slide">2</div>
+              <div className="slide">3</div>
+              <div className="slide">4</div>
+              <div className="slide">5</div>
+            </div>
+          </div>
+          <div className="button prev"></div>
+          <div className="button next"></div>
+        </div>
 
         {/* <div className="section-center">
           <txt>Welcome to <span>Wizth World</span>, <br /> {userData?.firstName} {userData?.lastName}</txt>
