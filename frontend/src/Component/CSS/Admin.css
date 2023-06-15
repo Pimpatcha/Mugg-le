@@ -5,6 +5,7 @@ body{
   background-image: url("https://wallpaper.dog/large/41123.jpg");
   display: flex;
   background-size: cover;
+  background-repeat: no-repeat;
   /* backdrop-filter: blur(3px); */
   justify-content: center;
   align-items: center;
@@ -268,7 +269,7 @@ body{
   margin-top: -15px;
 }
 
-/* .section-center {
+.section-center {
   width: 100%;
   padding: 0;
   margin: 0;
@@ -277,6 +278,7 @@ body{
   transform: translateY(-50%);
   border-radius: 20px;
   padding: 10px;
+  z-index: 1;
 }
 
 txt {
@@ -294,32 +296,28 @@ txt span {
   );
   background-size: 100%;
   background-repeat: repeat;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  -moz-background-clip: text;
-  -moz-text-fill-color: transparent;
   text-shadow: none;
-} */
+}
 
-.container{
+.box {
+  position: relative;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.set {
   height: 60vh;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
   position: relative;
-
+  overflow: hidden;
 }
-
-h1 {
-  text-align: center;
-  margin: 30px 0;
-}
-
 
 .slider-wrapper {
-  width: 600px;
-  height: 300px;
+  width: 100%;
+  height: 100%;
   background: #000;
   overflow: hidden;
 }
@@ -331,9 +329,8 @@ h1 {
   left: -100%;
 }
 
-
 .slide {
-  width: calc(100%/5);
+  width: calc(100% / 5);
   height: 100%;
   background: lightblue;
   display: flex;
@@ -350,18 +347,17 @@ h1 {
   border-top: 2px solid black;
   position: absolute;
   cursor: pointer;
-
 }
 
 .prev {
   border-left: 2px solid black;
-  left: 100px;
+  left: 50px;
   transform: rotate(-45deg);
 }
 
 .next {
   border-right: 2px solid black;
-  right: 100px;
+  right: 50px;
   transform: rotate(45deg);
 }
 

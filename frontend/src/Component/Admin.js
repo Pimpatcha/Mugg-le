@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { DataContext } from '../ContextApi';
 import logoweb from '../img/Icon.png';
-import './CSS/Home.css';
+import './CSS/Admin.css';
 import $ from 'jquery';
 
 const Admin = () => {
@@ -94,23 +94,25 @@ const Admin = () => {
           </ul>
         </nav>
 
-        <div className="container">
-          <div className="slider-wrapper">
-            <div className="inner-wrapper">
-              <div className="slide"><img src="img/Items/Slide/01.webp" alt="harry" /></div>
-              <div className="slide">2</div>
-              <div className="slide">3</div>
-              <div className="slide">4</div>
-              <div className="slide">5</div>
-            </div>
+        <div className="box">
+          <div className="section-center">
+          <p>Welcome to <span>Wizth World</span>, <br /> {userData?.firstName} {userData?.lastName}</p>
           </div>
-          <div className="button prev"></div>
-          <div className="button next"></div>
+          <div className="set">
+            <div className="slider-wrapper">
+              <div className="inner-wrapper">
+                <div className="slide"> <img src={require("../img/Items/Slide/2.webp")} alt="slide01" /></div>
+                <div className="slide"> <img src={require("../img/Items/Slide/12.webp")} alt="slide02" /></div>
+                <div className="slide"> <img src={require("../img/Items/Slide/8.webp")} alt="slide03" /></div>
+                <div className="slide"> <img src={require("../img/Items/Slide/6.webp")} alt="slide04" /></div>
+                <div className="slide"> <img src={require("../img/Items/Slide/10.webp")} alt="slide05" /></div>
+              </div>
+            </div>
+            <div className="button prev"></div>
+            <div className="button next"></div>
+          </div>
         </div>
 
-        {/* <div className="section-center">
-          <txt>Welcome to <span>Wizth World</span>, <br /> {userData?.firstName} {userData?.lastName}</txt>
-        </div> */}
       </div>
     </div>
   );
