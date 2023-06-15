@@ -97,7 +97,7 @@ const Admin = () => {
         <div className="container">
           <div className="slider-wrapper">
             <div className="inner-wrapper">
-              <div className="slide"><img src="img/" alt="harry" /></div>
+              <div className="slide"><img src="img/Items/Slide/01.webp" alt="harry" /></div>
               <div className="slide">2</div>
               <div className="slide">3</div>
               <div className="slide">4</div>
