@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { DataContext } from '../ContextApi';
 import logoweb from '../img/Icon.png';
@@ -8,7 +8,9 @@ import $ from 'jquery';
 const Admin = () => {
   const { userData } = useContext(DataContext);
   const [selectedImage, setSelectedImage] = useState(null);
+  const bannerRef = useRef(null);
   const [isEditing, setIsEditing] = useState(false);
+
   const [imageData, setImageData] = useState([
     'image-url-1.jpg',
     'image-url-2.jpg',
@@ -74,6 +76,19 @@ const Admin = () => {
     };
   }, []);
 
+  const scrollToBanner = () => {
+    bannerRef.current.scrollIntoView({ behavior: 'smooth' });
+  };
+
+  useEffect(() => {
+    const startButton = document.querySelector('.scrolly');
+    startButton.addEventListener('click', scrollToBanner);
+
+    return () => {
+      startButton.removeEventListener('click', scrollToBanner);
+    };
+  }, []);
+
   return (
     <div>
       <div className='startbar'>
@@ -83,7 +98,6 @@ const Admin = () => {
 
         <input className="menu-icon" type="checkbox" id="menu-icon" name="menu-icon" />
         <label htmlFor="menu-icon"></label>
-
         <nav className="nav">
           <ul>
             <li><a>Home</a></li>
@@ -96,24 +110,49 @@ const Admin = () => {
 
         <div className="box">
           <div className="section-center">
-          <p>Welcome to <span>Wizth World</span>, <br /> {userData?.firstName} {userData?.lastName}</p>
+            <p>
+              Welcome to <span>Wizth World</span>, <br /> {userData?.firstName} {userData?.lastName}
+            </p>
           </div>
           <div className="set">
             <div className="slider-wrapper">
               <div className="inner-wrapper">
-                <div className="slide"> <img src={require("../img/Items/Slide/2.webp")} alt="slide01" /></div>
-                <div className="slide"> <img src={require("../img/Items/Slide/12.webp")} alt="slide02" /></div>
-                <div className="slide"> <img src={require("../img/Items/Slide/8.webp")} alt="slide03" /></div>
-                <div className="slide"> <img src={require("../img/Items/Slide/6.webp")} alt="slide04" /></div>
-                <div className="slide"> <img src={require("../img/Items/Slide/10.webp")} alt="slide05" /></div>
+                <div className="slide">
+                  <img src={require("../img/Items/Slide/2.webp")} alt="slide01" />
+                </div>
+                <div className="slide">
+                  <img src={require("../img/Items/Slide/12.webp")} alt="slide02" />
+                </div>
+                <div className="slide">
+                  <img src={require("../img/Items/Slide/8.webp")} alt="slide03" />
+                </div>
+                <div className="slide">
+                  <img src={require("../img/Items/Slide/6.webp")} alt="slide04" />
+                </div>
+                <div className="slide">
+                  <img src={require("../img/Items/Slide/10.webp")} alt="slide05" />
+                </div>
               </div>
             </div>
             <div className="button prev"></div>
             <div className="button next"></div>
           </div>
-        </div>
 
+          <footer className="center start-btn">
+            <a href="#banner" className="scrolly circle">Start</a>
+          </footer>
+
+          <banner ref={bannerRef} className="banner" id="banner">
+            <p>Phase</p>
+          </banner>
+        </div>
       </div>
+
+      <div>
+        <img src='https://wallpaper.dog/large/17082505.jpg' alt='example' />
+        <img src='https://wallpaper.dog/large/17082505.jpg' alt='example' />
+      </div>
+
     </div>
   );
 };
