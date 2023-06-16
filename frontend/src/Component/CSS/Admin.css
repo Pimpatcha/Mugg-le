@@ -370,8 +370,8 @@ txt span {
 }
 
 .start-btn {
+  margin-top: -50px;
   z-index: 1;
-  margin-top: -50%;
 }
 
 .circle {
